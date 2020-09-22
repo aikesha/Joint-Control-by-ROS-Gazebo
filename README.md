@@ -107,7 +107,15 @@ The result you can see below in the figure:
 For end-effector the code is the same as for base joint 1.
 The result you can see below in the figure:
 <img src="images/joint5_sine.png" alt="sine_joint5" style="width: 600px;"/>
+Here you can also see the position from a terminal:
+<img src="images/rostopic_joint5.png" alt="joint5_move" style="width: 600px;"/>
 
-##That's it. Good Luck!
+## Reference
+[1] A. Mazhitov, A. Adilkhanov, Y. Massalim, Z. Kappassov and H. A. Varol, "Deformable Object
+Recognition Using Proprioceptive and Exteroceptive Tactile Sensing," 2019 IEEE/SICE International
+Symposium on System Integration (SII), Paris, France, 2019, pp. 734-739, doi:
+10.1109/SII.2019.8700392.
+
+## That's it. Good Luck!
 
 
