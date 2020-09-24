@@ -136,7 +136,7 @@ Here you can also see the position from a terminal:
 ### Decrease the Proportional gain of PID in the joints and repeat II and III. Use rqt (type rqt in terminator, open tab Plugins -> Configuration -> Dynamic Reconfigure). From the available configs find robot->jointNUMBER->PID->P
 
 #### Joint 1:
-##### Square wave
+##### Square wave:
 
 ##### Proportional gain of PID = 1000
 <img src="images/joint1_square_pid1000.jpg" alt="square_joint1" style="width: 600px;"/>
@@ -144,7 +144,7 @@ Here you can also see the position from a terminal:
 ##### Proportional gain of PID = 10000
 <img src="images/joint1_square_pid10000.jpg" alt="square_joint1" style="width: 600px;"/>
 
-##### Sine wave
+##### Sine wave:
 
 ##### Proportional gain of PID = 1000
 <img src="images/joint1_sine_pid500.jpg" alt="sine_joint1" style="width: 600px;"/>
@@ -153,7 +153,7 @@ Here you can also see the position from a terminal:
 <img src="images/joint1_sine_pid5000.jpg" alt="sine_joint1" style="width: 600px;"/>
 
 #### Joint 2:
-##### Square wave
+##### Square wave:
 
 ##### Proportional gain of PID = 1000
 <img src="images/joint5_square_pid500.jpg" alt="square_joint5" style="width: 600px;"/>
@@ -161,7 +161,7 @@ Here you can also see the position from a terminal:
 ##### Proportional gain of PID = 10000
 <img src="images/joint5_square_pid5000.jpg" alt="square_joint5" style="width: 600px;"/>
 
-##### Sine wave
+##### Sine wave:
 
 ##### Proportional gain of PID = 1000
 <img src="images/joint5_sine_pid500.jpg" alt="sine_joint5" style="width: 600px;"/>
@@ -169,20 +169,6 @@ Here you can also see the position from a terminal:
 ##### Proportional gain of PID = 10000
 <img src="images/joint5_sine_pid5000.jpg" alt="sine_joint5" style="width: 600px;"/>
 
-### Get the sine-wave response of (you can create a node that will send a sine-wave function):
-* the joint at the base of the robot
-```cpp
-   while (ros::ok()) {
-                  t = ros::Time::now().toSec();
-                  std_msgs::Float64 msg_to_send;
-                  msg_to_send.data = sin(t);
-                  pub1.publish(msg_to_send);
-                  ROS_INFO("Moving joint 1 to position %f", msg_to_send.data);
-                  //i = i + 0.01;
-                  ros::spinOnce();
-                  loop_rate.sleep();
-    }
-```
 
 ## Reference
 [1] A. Mazhitov, A. Adilkhanov, Y. Massalim, Z. Kappassov and H. A. Varol, "Deformable Object
