@@ -65,28 +65,51 @@ sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
 * the joint at the base of the robot
 In my case I made a node that sends a square-wave function as below:
 ```cpp
+float X = 0;
+
+void joint1angleCallback(const std_msgs::Float64 msg)
+{
+    X = msg.data;
+	ROS_INFO("X: %f", X);
+}
+
+int main(int argc, char **argv){
+    float i = 0.0;
+    float k; 
+    ros::init(argc, argv, "joint1moving");
+
+    ros::NodeHandle nh;
+
+    ros::Publisher pub1 = nh.advertise<std_msgs::Float64>("/robot/joint1_position_controller/command", 10);
+     ros::Subscriber sub1 = nh.subscribe("Aigerim_joint1_angle", 10, joint1angleCallback);
+    ros::Rate loop_rate(10);
+    ros::Time startTime = ros::Time::now();
+
     while (ros::ok()) {
-                  std_msgs::Float64 msg_to_send;
-                  t = ros::Time::now().toSec();
-                  if (t >= 15)
-                  {
-                      msg_to_send.data = 1;
+                 k = sin(i);
+                 if (k > 0) {
+	                   k = 1;			
                   } else {
-                      msg_to_send.data = 0;
+                       k = 0;
                   }
-                   
+                  std_msgs::Float64 msg_to_send;
+                  msg_to_send.data = k;
                   pub1.publish(msg_to_send);
                   ROS_INFO("Moving joint 1 to position %f", msg_to_send.data);
-                  //i = i + 0.01;
+                  i = i + 0.1;
                   ros::spinOnce();
                   loop_rate.sleep();
     }
+   return 0;
+}
 ```
-The result you can see in the figure below (for joint 1):
-<img src="images/joint1_square.png" alt="square_joint1" style="width: 600px;"/>
+The result you can see in the figure below with (Proportional gain of PID = 1000)(for joint 1):
+<img src="images/joint1_square_pid1000.jpg" alt="square_joint1" style="width: 600px;"/>
 
 * the joint at the end-effector of the robot
-For joint 5 the code is same.
+For joint 5 the code is same. The result you can see below in the figure:
+<img src="images/joint5_square_pid500.jpg" alt="square_joint5" style="width: 600px;"/>
+
 ### Get the sine-wave response of (you can create a node that will send a sine-wave function):
 * the joint at the base of the robot
 ```cpp
@@ -101,14 +124,55 @@ For joint 5 the code is same.
                   loop_rate.sleep();
     }
 ```
-The result you can see below in the figure:
-<img src="images/joint1_sine.png" alt="sine_joint1" style="width: 600px;"/>
+The result you can see below in the figure (with Proportional gain of PID = 500):
+<img src="images/joint1_sine_pid500.jpg" alt="sine_joint1" style="width: 600px;"/>
 * the joint at the end-effector of the robot
 For end-effector the code is the same as for base joint 1.
 The result you can see below in the figure:
-<img src="images/joint5_sine.png" alt="sine_joint5" style="width: 600px;"/>
+<img src="images/joint5_sine_pid500.jpg" alt="sine_joint5" style="width: 600px;"/>
 Here you can also see the position from a terminal:
 <img src="images/rostopic_joint5.png" alt="joint5_move" style="width: 600px;"/>
+
+### Decrease the Proportional gain of PID in the joints and repeat II and III. Use rqt (type rqt in terminator, open tab Plugins -> Configuration -> Dynamic Reconfigure). From the available configs find robot->jointNUMBER->PID->P
+
+#### Joint 1:
+##### Square wave
+###### Proportional gain of PID = 1000
+<img src="images/joint1_square_pid1000.jpg" alt="square_joint1" style="width: 600px;"/>
+###### Proportional gain of PID = 10000
+<img src="images/joint1_square_pid10000.jpg" alt="square_joint1" style="width: 600px;"/>
+##### Sine wave
+###### Proportional gain of PID = 1000
+<img src="images/joint1_sine_pid500.jpg" alt="sine_joint1" style="width: 600px;"/>
+###### Proportional gain of PID = 10000
+<img src="images/joint1_sine_pid5000.jpg" alt="sine_joint1" style="width: 600px;"/>
+
+#### Joint 2:
+##### Square wave
+###### Proportional gain of PID = 1000
+<img src="images/joint5_square_pid500.jpg" alt="square_joint5" style="width: 600px;"/>
+###### Proportional gain of PID = 10000
+<img src="images/joint5_square_pid5000.jpg" alt="square_joint5" style="width: 600px;"/>
+##### Sine wave
+###### Proportional gain of PID = 1000
+<img src="images/joint5_sine_pid500.jpg" alt="sine_joint5" style="width: 600px;"/>
+###### Proportional gain of PID = 10000
+<img src="images/joint5_sine_pid5000.jpg" alt="sine_joint5" style="width: 600px;"/>
+
+### Get the sine-wave response of (you can create a node that will send a sine-wave function):
+* the joint at the base of the robot
+```cpp
+   while (ros::ok()) {
+                  t = ros::Time::now().toSec();
+                  std_msgs::Float64 msg_to_send;
+                  msg_to_send.data = sin(t);
+                  pub1.publish(msg_to_send);
+                  ROS_INFO("Moving joint 1 to position %f", msg_to_send.data);
+                  //i = i + 0.01;
+                  ros::spinOnce();
+                  loop_rate.sleep();
+    }
+```
 
 ## Reference
 [1] A. Mazhitov, A. Adilkhanov, Y. Massalim, Z. Kappassov and H. A. Varol, "Deformable Object
@@ -117,5 +181,3 @@ Symposium on System Integration (SII), Paris, France, 2019, pp. 734-739, doi:
 10.1109/SII.2019.8700392.
 
 ## That's it. Good Luck!
-
-
