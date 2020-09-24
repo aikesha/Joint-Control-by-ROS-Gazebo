@@ -137,26 +137,36 @@ Here you can also see the position from a terminal:
 
 #### Joint 1:
 ##### Square wave
-###### Proportional gain of PID = 1000
+
+##### Proportional gain of PID = 1000
 <img src="images/joint1_square_pid1000.jpg" alt="square_joint1" style="width: 600px;"/>
-###### Proportional gain of PID = 10000
+
+##### Proportional gain of PID = 10000
 <img src="images/joint1_square_pid10000.jpg" alt="square_joint1" style="width: 600px;"/>
+
 ##### Sine wave
-###### Proportional gain of PID = 1000
+
+##### Proportional gain of PID = 1000
 <img src="images/joint1_sine_pid500.jpg" alt="sine_joint1" style="width: 600px;"/>
-###### Proportional gain of PID = 10000
+
+##### Proportional gain of PID = 10000
 <img src="images/joint1_sine_pid5000.jpg" alt="sine_joint1" style="width: 600px;"/>
 
 #### Joint 2:
 ##### Square wave
-###### Proportional gain of PID = 1000
+
+##### Proportional gain of PID = 1000
 <img src="images/joint5_square_pid500.jpg" alt="square_joint5" style="width: 600px;"/>
-###### Proportional gain of PID = 10000
+
+##### Proportional gain of PID = 10000
 <img src="images/joint5_square_pid5000.jpg" alt="square_joint5" style="width: 600px;"/>
+
 ##### Sine wave
-###### Proportional gain of PID = 1000
+
+##### Proportional gain of PID = 1000
 <img src="images/joint5_sine_pid500.jpg" alt="sine_joint5" style="width: 600px;"/>
-###### Proportional gain of PID = 10000
+
+##### Proportional gain of PID = 10000
 <img src="images/joint5_sine_pid5000.jpg" alt="sine_joint5" style="width: 600px;"/>
 
 ### Get the sine-wave response of (you can create a node that will send a sine-wave function):
