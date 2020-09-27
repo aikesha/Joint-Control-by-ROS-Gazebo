@@ -1,4 +1,4 @@
-# Joint-Control-by-ROS-Gazebo
+# Laboratory 3: Joint-Control-by-ROS-Gazebo
 
 ## Note: This project is about controlling a motor in ROS using Gazebo,
 
